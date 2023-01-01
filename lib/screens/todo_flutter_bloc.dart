@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ioc_container/ioc_container.dart';
 import 'package:my_todo_app/bloc/todo.dart';
+import 'package:my_todo_app/helpers/todo_item_widget.dart';
 
 import '../bloc/todo_bloc_package.dart';
 
@@ -11,11 +12,11 @@ class TodoListBloc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todoBloc = container.get<TodoBloc>();
+    final todoBloc = container<TodoBloc>();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo List'),
+        title: const Text('Todo List using Bloc'),
       ),
       body: BlocBuilder<TodoBloc, TodoState>(
         bloc: todoBloc,
@@ -26,14 +27,9 @@ class TodoListBloc extends StatelessWidget {
             itemCount: todos.length,
             itemBuilder: (context, index) {
               final todo = todos[index];
-              return ListTile(
-                title: Text(todo.title),
-                trailing: IconButton(
-                  icon: todo.isCompleted
-                      ? const Icon(Icons.check_box)
-                      : const Icon(Icons.check_box_outline_blank),
-                  onPressed: () => todoBloc.add(ToggleTodo(todo: todo)),
-                ),
+              return TodoItemWidget(
+                todo: todo,
+                onPressed: () => todoBloc.add(ToggleTodo(todo: todo)),
                 onLongPress: () => todoBloc.add(DeleteTodo(todo: todo)),
               );
             },

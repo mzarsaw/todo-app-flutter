@@ -4,6 +4,7 @@ import 'package:my_todo_app/bloc/todo_bloc_package.dart';
 import 'package:my_todo_app/bloc/todo_bloobit.dart';
 import 'package:my_todo_app/bloc/todo_stream.dart';
 import 'package:my_todo_app/screens/home_page.dart';
+import 'package:my_todo_app/screens/todo_bloobit.dart';
 import 'package:my_todo_app/services/dialog_service.dart';
 
 void main() {
@@ -37,12 +38,14 @@ class MyApp extends StatelessWidget {
 
 IocContainer compose() {
   final builder = IocContainerBuilder()
-    ..add((container) =>
-        TodoStream(dialogService: container.get<IDialogService>()))
-    ..add(
-        (container) => TodoBloc(dialogService: container.get<IDialogService>()))
-    ..add((container) =>
-        TodoBloobit(dialogService: container.get<IDialogService>()))
+    ..addSingleton(
+        (container) => TodoStream(dialogService: container<IDialogService>()))
+    ..addSingleton(
+        (container) => TodoBloc(dialogService: container<IDialogService>()))
+    ..addSingleton(
+        (container) => TodoBloobit(dialogService: container<IDialogService>()))
+    ..add<TodoListBloobitView>((container) =>
+        TodoListBloobitView(todoBloobit: container<TodoBloobit>()))
     ..add<IDialogService>((_) => DialogService(navigatorKey: navigatorKey));
 
   return builder.toContainer();

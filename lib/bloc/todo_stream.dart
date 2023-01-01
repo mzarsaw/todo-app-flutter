@@ -16,9 +16,8 @@ class TodoStream {
 
   TodoStream({required this.dialogService}) {
     _eventController.stream.listen(_mapEventToState);
-    _stateController.add(TodoState(
-        todos: [const Todo(title: 'test', isCompleted: true)],
-        isEditing: false));
+    _stateController
+        .add(TodoState(todos: [AppDefaults.testTodo], isEditing: false));
   }
 
   void _mapEventToState(TodoEvent event) async {

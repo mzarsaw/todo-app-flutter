@@ -6,7 +6,7 @@ import 'package:my_todo_app/services/dialog_service.dart';
 class TodoBloobit extends Bloobit<TodoState> {
   final IDialogService dialogService;
   TodoBloobit({required this.dialogService, super.onSetState})
-      : super(TodoState(todos: [], isEditing: false));
+      : super(TodoState(todos: [AppDefaults.testTodo], isEditing: false));
   Future addTodo() async {
     var title =
         await dialogService.showInputDialog(title: AppDefaults.dialogTitle);

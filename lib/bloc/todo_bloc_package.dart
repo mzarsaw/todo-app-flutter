@@ -7,9 +7,8 @@ import 'package:my_todo_app/services/dialog_service.dart';
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final IDialogService dialogService;
   TodoBloc({required this.dialogService})
-      : super(TodoState(
-            todos: <Todo>[const Todo(title: 'test', isCompleted: true)],
-            isEditing: false)) {
+      : super(
+            TodoState(todos: <Todo>[AppDefaults.testTodo], isEditing: false)) {
     on<AddTodo>(_addTodo);
     on<DeleteTodo>((event, emit) =>
         emit(state.copyWith(todos: state.todos..remove(event.todo))));

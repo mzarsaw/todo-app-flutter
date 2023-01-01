@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:my_todo_app/bloc/todo.dart';
 import 'package:my_todo_app/bloc/todo_bloobit.dart';
+import 'package:my_todo_app/helpers/todo_item_widget.dart';
 
-class TodoListBloobit extends StatelessWidget {
+class TodoListBloobitView extends StatelessWidget {
   final TodoBloobit todoBloobit;
-  const TodoListBloobit({super.key, required this.todoBloobit});
+  const TodoListBloobitView({super.key, required this.todoBloobit});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo List'),
+        title: const Text('Todo List using bloobit'),
       ),
       body: ListView.builder(
         itemCount: todoBloobit.state.todos.length,
         itemBuilder: (context, index) {
           final todo = todoBloobit.state.todos[index];
-          return ListTile(
-            title: Text(todo.title),
-            trailing: IconButton(
-              icon: todo.isCompleted
-                  ? const Icon(Icons.check_box)
-                  : const Icon(Icons.check_box_outline_blank),
-              onPressed: () => todoBloobit.toggleTodo(todo),
-            ),
+          return TodoItemWidget(
+            todo: todo,
+            onPressed: () => todoBloobit.toggleTodo(todo),
             onLongPress: () => todoBloobit.deleteTodo(todo),
           );
         },

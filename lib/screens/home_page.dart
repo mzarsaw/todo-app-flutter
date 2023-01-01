@@ -16,42 +16,45 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Todo App'),
+        centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            child: const Text('using streams'),
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => TodoListStreamBuilder(
-                          container: container,
-                        ))),
-          ),
-          TextButton(
-            child: const Text('using Bloc'),
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => TodoListBloc(
-                          container: container,
-                        ))),
-          ),
-          TextButton(
-            child: const Text('using Bloobit'),
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => BloobitWidget(
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              child: const Text('using streams'),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TodoListStreamBuilder(
+                            container: container,
+                          ))),
+            ),
+            ElevatedButton(
+              child: const Text('using Bloc'),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TodoListBloc(
+                            container: container,
+                          ))),
+            ),
+            ElevatedButton(
+              child: const Text('using Bloobit'),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BloobitWidget(
                           bloobit: container.get<TodoBloobit>(),
-                          builder: (context, bloobit) => TodoListBloobit(
-                            todoBloobit: bloobit,
-                          ),
-                        ))),
-          ),
-        ],
+                          builder: (context, bloobit) =>
+                              container<TodoListBloobitView>()))),
+            ),
+          ],
+        ),
       ),
     );
   }
