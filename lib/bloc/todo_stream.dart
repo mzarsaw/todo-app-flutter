@@ -43,8 +43,9 @@ class TodoStream {
     }
   }
 
-  Future _deleteTodo(Todo todo) async => _stateController.add((await state.last)
-      .copyWith(todos: _stateController.value.todos..remove(todo)));
+  Future _deleteTodo(Todo todo) async =>
+      _stateController.add(_stateController.value
+          .copyWith(todos: _stateController.value.todos..remove(todo)));
 
   Future _toggleTodo(Todo todo) async {
     final todoState = _stateController.value;

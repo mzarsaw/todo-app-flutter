@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_todo_app/bloc/todo_bloobit.dart';
+import 'package:my_todo_app/helpers/app_default.dart';
 import 'package:my_todo_app/helpers/todo_item_widget.dart';
 
 class TodoListBloobitView extends StatelessWidget {
@@ -10,7 +11,8 @@ class TodoListBloobitView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo List using bloobit'),
+        title:
+            const Text('${AppDefaults.todoList} ${AppDefaults.usingBloobit}'),
       ),
       body: ListView.builder(
         itemCount: todoBloobit.state.todos.length,
