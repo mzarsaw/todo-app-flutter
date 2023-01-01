@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/helpers/app_default.dart';
 
 abstract class IDialogService {
   Future<String?> showInputDialog(
@@ -11,7 +12,7 @@ class DialogService implements IDialogService {
   @override
   Future<String?> showInputDialog(
       {VoidCallback? onAdd, VoidCallback? onCancel, String? title}) {
-    title = title ?? 'Add Todo';
+    title = title ?? AppDefaults.dialogTitle;
     return showDialog<String?>(
       context: navigatorKey.currentState!.context,
       builder: (context) {
@@ -30,7 +31,7 @@ class DialogService implements IDialogService {
                 }
                 Navigator.pop<String?>(context);
               },
-              child: const Text('Cancel'),
+              child: const Text(AppDefaults.cancel),
             ),
             TextButton(
               onPressed: () {
@@ -39,7 +40,7 @@ class DialogService implements IDialogService {
                 }
                 Navigator.pop<String?>(context, textController.text);
               },
-              child: const Text('Add'),
+              child: const Text(AppDefaults.add),
             ),
           ],
         );

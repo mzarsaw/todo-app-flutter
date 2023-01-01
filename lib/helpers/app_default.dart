@@ -8,6 +8,10 @@ class AppDefaults {
   static const String usingBloc = 'using Bloc';
   static const String usingBloobit = 'using Bloobit';
   static const String todoList = 'Todo list';
-  static const Todo testTodo = Todo(title: 'test', isCompleted: true);
+  static const String newItem = 'New Item';
+  static const String add = 'Add';
+  static const String cancel = 'Cancel';
+  static const String defaultItemTitle = 'test';
+  static const Todo testTodo = Todo(title: defaultItemTitle, isCompleted: true);
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 }
