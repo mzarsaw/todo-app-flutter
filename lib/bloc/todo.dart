@@ -29,27 +29,25 @@ class Todo {
 
 // The events that can modify the todo app's state
 @immutable
-abstract class TodoEvent {
-  final Todo todo;
-  const TodoEvent({required this.todo});
-}
+abstract class TodoEvent {}
 
 @immutable
-class AddTodo extends TodoEvent {
-  const AddTodo({required super.todo});
-}
+class AddTodo extends TodoEvent {}
 
 @immutable
 class DeleteTodo extends TodoEvent {
-  const DeleteTodo({required super.todo});
+  final Todo todo;
+  DeleteTodo({required this.todo});
 }
 
 @immutable
 class ToggleTodo extends TodoEvent {
-  const ToggleTodo({required super.todo});
+  final Todo todo;
+  ToggleTodo({required this.todo});
 }
 
 @immutable
 class ToggleEditMode extends TodoEvent {
-  const ToggleEditMode({required super.todo});
+  final Todo todo;
+  ToggleEditMode({required this.todo});
 }

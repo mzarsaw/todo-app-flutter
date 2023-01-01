@@ -44,10 +44,11 @@ class HomePage extends StatelessWidget {
             onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => BloobitPropagator(
-                          key: bloobitPropagatorKey,
+                    builder: (context) => BloobitWidget(
                           bloobit: container.get<TodoBloobit>(),
-                          child: const TodoListByBloobit(),
+                          builder: (context, bloobit) => TodoListBloobit(
+                            todoBloobit: bloobit,
+                          ),
                         ))),
           ),
         ],

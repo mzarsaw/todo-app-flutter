@@ -1,17 +1,20 @@
 import 'dart:async';
 
 import 'package:my_todo_app/bloc/todo.dart';
+import 'package:my_todo_app/helpers/app_default.dart';
+import 'package:my_todo_app/services/dialog_service.dart';
 import 'package:rxdart/rxdart.dart';
 
 class TodoStream {
   final _stateController = BehaviorSubject<TodoState>();
   final _eventController = BehaviorSubject<TodoEvent>();
+  final IDialogService dialogService;
 
   Stream<TodoState> get state => _stateController.stream;
 
   Sink<TodoEvent> get event => _eventController.sink;
 
-  TodoStream() {
+  TodoStream({required this.dialogService}) {
     _eventController.stream.listen(_mapEventToState);
     _stateController.add(TodoState(
         todos: [const Todo(title: 'test', isCompleted: true)],
@@ -20,7 +23,7 @@ class TodoStream {
 
   void _mapEventToState(TodoEvent event) async {
     if (event is AddTodo) {
-      await _addTodo(event.todo);
+      await _addTodo();
     } else if (event is DeleteTodo) {
       await _deleteTodo(event.todo);
     } else if (event is ToggleTodo) {
@@ -30,10 +33,16 @@ class TodoStream {
     }
   }
 
-  Future _addTodo(Todo todo) async =>
+  Future _addTodo() async {
+    var title =
+        await dialogService.showInputDialog(title: AppDefaults.dialogTitle);
+    if (title != null) {
       _stateController.add(_stateController.value.copyWith(
-        todos: _stateController.value.todos..add(todo),
+        todos: _stateController.value.todos
+          ..add(Todo(title: title, isCompleted: false)),
       ));
+    }
+  }
 
   Future _deleteTodo(Todo todo) async => _stateController.add((await state.last)
       .copyWith(todos: _stateController.value.todos..remove(todo)));

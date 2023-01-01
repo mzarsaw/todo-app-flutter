@@ -4,12 +4,15 @@ import 'package:my_todo_app/bloc/todo_bloc_package.dart';
 import 'package:my_todo_app/bloc/todo_bloobit.dart';
 import 'package:my_todo_app/bloc/todo_stream.dart';
 import 'package:my_todo_app/screens/home_page.dart';
+import 'package:my_todo_app/services/dialog_service.dart';
 
 void main() {
   runApp(MyApp(
     container: compose(),
   ));
 }
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   final IocContainer container;
@@ -20,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Todo App Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -33,9 +37,13 @@ class MyApp extends StatelessWidget {
 
 IocContainer compose() {
   final builder = IocContainerBuilder()
-    ..addSingletonService(TodoStream())
-    ..addSingletonService(TodoBloc())
-    ..addSingletonService(TodoBloobit());
+    ..add((container) =>
+        TodoStream(dialogService: container.get<IDialogService>()))
+    ..add(
+        (container) => TodoBloc(dialogService: container.get<IDialogService>()))
+    ..add((container) =>
+        TodoBloobit(dialogService: container.get<IDialogService>()))
+    ..add<IDialogService>((_) => DialogService(navigatorKey: navigatorKey));
 
   return builder.toContainer();
 }

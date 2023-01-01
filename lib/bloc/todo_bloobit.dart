@@ -1,11 +1,20 @@
 import 'package:bloobit/bloobit.dart';
 import 'package:my_todo_app/bloc/todo.dart';
+import 'package:my_todo_app/helpers/app_default.dart';
+import 'package:my_todo_app/services/dialog_service.dart';
 
 class TodoBloobit extends Bloobit<TodoState> {
-  TodoBloobit({super.onSetState})
+  final IDialogService dialogService;
+  TodoBloobit({required this.dialogService, super.onSetState})
       : super(TodoState(todos: [], isEditing: false));
-  void addTodo(Todo todo) =>
-      setState(state.copyWith(todos: state.todos..add(todo)));
+  Future addTodo() async {
+    var title =
+        await dialogService.showInputDialog(title: AppDefaults.dialogTitle);
+    if (title != null) {
+      setState(state.copyWith(
+          todos: state.todos..add(Todo(title: title, isCompleted: false))));
+    }
+  }
 
   void deleteTodo(Todo todo) =>
       setState(state.copyWith(todos: state.todos..remove(todo)));

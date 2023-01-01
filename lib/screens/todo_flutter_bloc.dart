@@ -42,40 +42,8 @@ class TodoListBloc extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => _showAddTodoDialog(context, todoBloc),
+        onPressed: () => todoBloc.add(AddTodo()),
       ),
-    );
-  }
-
-  void _showAddTodoDialog(BuildContext context, TodoBloc todoBloc) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        final textController = TextEditingController();
-
-        return AlertDialog(
-          title: const Text('Add Todo'),
-          content: TextField(
-            controller: textController,
-            autofocus: true,
-          ),
-          actions: [
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.pop(context),
-            ),
-            TextButton(
-              child: const Text('Add'),
-              onPressed: () {
-                final todo =
-                    Todo(title: textController.text, isCompleted: false);
-                todoBloc.add(AddTodo(todo: todo));
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }
