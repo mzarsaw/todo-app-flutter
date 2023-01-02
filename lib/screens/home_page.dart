@@ -1,7 +1,7 @@
 import 'package:bloobit/bloobit.dart';
 import 'package:flutter/material.dart';
 import 'package:ioc_container/ioc_container.dart';
-import 'package:my_todo_app/bloc/todo_bloobit.dart';
+import 'package:my_todo_app/state_managements/todo_bloobit.dart';
 import 'package:my_todo_app/helpers/app_default.dart';
 import 'package:my_todo_app/screens/todo_bloobit.dart';
 import 'package:my_todo_app/screens/todo_flutter_bloc.dart';

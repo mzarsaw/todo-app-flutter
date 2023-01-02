@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_todo_app/bloc/todo_bloobit.dart';
+import 'package:my_todo_app/state_managements/todo_bloobit.dart';
 import 'package:my_todo_app/helpers/app_default.dart';
 import 'package:my_todo_app/helpers/todo_item_widget.dart';
 

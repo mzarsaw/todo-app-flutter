@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_todo_app/bloc/todo.dart';
+import 'package:my_todo_app/state_managements/todo.dart';
 
 class AppDefaults {
   static const String dialogTitle = 'Add Todo';
