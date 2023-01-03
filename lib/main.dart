@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ioc_container/ioc_container.dart';
-import 'package:my_todo_app/state_managements/todo_bloc_package.dart';
+import 'package:my_todo_app/state_managements/todo_bloc.dart';
 import 'package:my_todo_app/state_managements/todo_bloobit.dart';
 import 'package:my_todo_app/state_managements/todo_stream.dart';
 import 'package:my_todo_app/helpers/app_default.dart';

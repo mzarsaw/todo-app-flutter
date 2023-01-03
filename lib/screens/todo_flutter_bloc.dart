@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ioc_container/ioc_container.dart';
 import 'package:my_todo_app/state_managements/todo.dart';
-import 'package:my_todo_app/state_managements/todo_bloc_package.dart';
+import 'package:my_todo_app/state_managements/todo_bloc.dart';
 import 'package:my_todo_app/helpers/app_default.dart';
 import 'package:my_todo_app/helpers/todo_item_widget.dart';
 
